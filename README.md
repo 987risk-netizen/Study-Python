@@ -1,5 +1,34 @@
 # Quick Setup Guide 🚀
+# Python Libraries Installation Commands
 
+```powershell
+pip install Flask>=2.0
+pip install mysql-connector-python>=8.0
+pip install psycopg2-binary>=2.9
+pip install gunicorn>=20.1.0
+pip install flask-cors>=3.0
+pip install python-dotenv>=0.19.0
+```
+
+---
+
+## OR Install All at Once:
+
+```powershell
+pip install Flask mysql-connector-python psycopg2-binary gunicorn flask-cors python-dotenv
+```
+
+---
+
+## OR Use requirements.txt (Already Done ✅):
+
+```powershell
+pip install -r requirements.txt
+```
+
+---
+
+**You already ran the last command, so everything is installed! 🎉**
 ## 1. Install Software
 
 ### Python (3.8+)
