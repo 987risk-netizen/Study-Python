@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Zenathia.ai</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1 class="site-title">Zenathia.ai</h1>
+    <nav>
+      <a href="">Home</a>
+      <a href="">About</a>
+      <a href="">Events</a>
+      <a href="">Contact</a>
+      <a href="">Register</a>
+    </nav>
+  </header>
+  <main>
+      <div class="card">
+      <h1>Dynamic Events</h1>
+      <div class="flex-search">
+        <input type="text" id="searchInput" placeholder="🔍 Search events..." class="flex-1">
+        <button class="btn" onclick="searchEvents()">Search</button>
+        <button class="btn" onclick="showAll()">Show All</button>
+      </div>
+    </div>
+    <section class="container" id="dynamicEvents"></section>
+  </main>
+  <footer>© 2025 Simple Site</footer>
+  <script>
+    const events = [
+      {title: "Tech Conference 2025", date: "Nov 15, 2025", location: "Convention Center", desc: "Annual technology conference with industry leaders."},
+      {title: "Art Exhibition", date: "Dec 12, 2025", location: "Gallery Downtown", desc: "Contemporary art showcase featuring local artists."},
+      {title: "Music Festival", date: "Jan 20, 2026", location: "City Park", desc: "Live music performances from various genres."},
+      {title: "Coding Bootcamp", date: "Feb 5, 2026", location: "Tech Hub", desc: "Intensive programming workshop for beginners."}
+    ];
+    function displayEvents(arr) {
+      document.getElementById('dynamicEvents').innerHTML = arr.map(e => 
+        `<div class="card"><h3>${e.title}</h3><p><strong>Date:</strong> ${e.date} • <strong>Location:</strong> ${e.location}</p><p>${e.desc}</p></div>`
+      ).join('');
+    }
+    function searchEvents() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      displayEvents(events.filter(e => e.title.toLowerCase().includes(q) || e.desc.toLowerCase().includes(q) || e.location.toLowerCase().includes(q) || e.date.toLowerCase().includes(q)));
+    }
+    function showAll() {
+      document.getElementById('searchInput').value = '';
+      displayEvents(events);
+    }
+    displayEvents(events);
+  </script>
+</body>
+</html>

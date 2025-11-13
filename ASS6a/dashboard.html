@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zenathia.ai</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 class="site-title">Zenathia.ai</h1>
+        <nav>
+            <a href="login.html">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 style="margin:16px 0; text-align:center;">Events</h2>
+        <div style="text-align:center; margin:20px 0;">
+            <button id="add-btn" style="background:#4CAF50; color:white; padding:12px 24px; border:none; border-radius:6px; cursor:pointer; font-size:16px; font-weight:bold;">Add Event</button>
+        </div>
+        <div id="list" class="container"></div>
+
+        <div class="card" id="form-card" style="display:none;">
+            <h2 style="margin-top:0;">Add / Edit Event</h2>
+            <form class="contact-form" id="record-form">
+                <input type="hidden" id="idx">
+                <input type="text" name="title" id="title" placeholder="Event Title" required>
+                <select name="category" id="category" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option>Workshop</option>
+                    <option>Conference</option>
+                    <option>Seminar</option>
+                    <option>Webinar</option>
+                    <option>Meetup</option>
+                    <option>Other</option>
+                </select>
+                <input type="date" name="date" id="date" placeholder="Date" required>
+                <input type="text" name="venue" id="venue" placeholder="Venue" required>
+                <textarea name="description" id="description" placeholder="Description" rows="3"></textarea>
+                <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                    <button type="submit">Save</button>
+                    <button type="reset">Clear</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+    const KEY = 'events';
+
+        const $ = (sel) => document.querySelector(sel);
+        const listEl = $('#list');
+        const formEl = $('#record-form');
+        const idxEl = $('#idx');
+        const formCard = $('#form-card');
+        const addBtn = $('#add-btn');
+
+        function load() {
+            try { return JSON.parse(localStorage.getItem(KEY)) || []; }
+            catch { return []; }
+        }
+        function save(arr) { localStorage.setItem(KEY, JSON.stringify(arr)); }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;');
+        }
+
+        
+        const CATEGORIES = ['Workshop', 'Conference', 'Seminar', 'Webinar', 'Meetup', 'Other'];
+        const TITLES = [
+            'AI/ML Workshop', 'Cybersecurity Seminar', 'Web Dev Conference',
+            'Cloud Computing Webinar', 'Data Science Meetup', 'IoT Bootcamp', 'Blockchain Basics'
+        ];
+        const VENUES = ['Auditorium A', 'Hall 2', 'Lab 3', 'Conference Room', 'Seminar Hall'];
+        const rand = (arr) => arr[Math.floor(Math.random() * arr.length)];
+        function randDateISO() {
+            const d = new Date();
+            d.setDate(d.getDate() + Math.floor(Math.random() * 60) + 1); 
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
+        }
+        function normalize(rec) {
+            return {
+                title: (rec.title || rec.event || rec.name || rand(TITLES)).toString(),
+                category: rec.category || rand(CATEGORIES),
+                date: rec.date || randDateISO(),
+                venue: rec.venue || rand(VENUES),
+                description: rec.description || ''
+            };
+        }
+        function seedOrNormalize() {
+            let data = load();
+            data = (data || []).map(normalize);
+            while (data.length < 3) data.push(normalize({}));
+            save(data);
+        }
+
+        function render() {
+            const data = load();
+            if (!data.length) {
+                listEl.innerHTML = '<div class="card"><p>No events yet.</p></div>';
+                return;
+            }
+            listEl.innerHTML = data.map((r, i) => {
+                const title = r.title || r.event || r.name || 'Untitled Event';
+                const category = r.category || 'Other';
+                const date = r.date || '';
+                const venue = r.venue || '';
+                const desc = r.description || '';
+                const dateFmt = (date && /^\d{4}-\d{2}-\d{2}$/.test(date))
+                  ? date.split('-').reverse().join('-') 
+                  : date;
+                const dateDisplay = dateFmt || 'Not set';
+                const venueDisplay = venue || 'Not set';
+                return `
+                <div class="card" data-i="${i}">
+                    <h1>${escapeHtml(title)}</h1>
+                    <p><strong>Category:</strong> ${escapeHtml(category)}</p>
+                    <p><strong>Date:</strong> ${escapeHtml(dateDisplay)}</p>
+                    <p><strong>Venue:</strong> ${escapeHtml(venueDisplay)}</p>
+                    ${desc ? `<p>${escapeHtml(desc)}</p>` : ''}
+                    <nav>
+                        <a href="#" data-action="edit" data-i="${i}">Edit</a>
+                        <a href="#" data-action="delete" data-i="${i}">Delete</a>
+                    </nav>
+                </div>`;
+            }).join('');
+        }
+
+        addBtn.addEventListener('click', () => {
+            formCard.style.display = 'block';
+            formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        formEl.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const rec = {
+                title: $('#title').value.trim(),
+                category: $('#category').value || 'Other',
+                date: $('#date').value,
+                venue: $('#venue').value.trim(),
+                description: $('#description').value.trim(),
+            };
+            const data = load();
+            const i = idxEl.value ? parseInt(idxEl.value, 10) : -1;
+            if (i >= 0 && i < data.length) data[i] = rec; else data.push(rec);
+            save(data);
+            formEl.reset();
+            idxEl.value = '';
+            formCard.style.display = 'none';
+            render();
+        });
+
+        formEl.addEventListener('reset', () => { 
+            idxEl.value = ''; 
+            formCard.style.display = 'none';
+        });
+
+        listEl.addEventListener('click', (e) => {
+            const a = e.target.closest('a[data-action]');
+            if (!a) return;
+            e.preventDefault();
+            const i = parseInt(a.dataset.i, 10);
+            const data = load();
+            if (a.dataset.action === 'edit') {
+                const r = data[i];
+                if (!r) return;
+                $('#title').value = r.title || r.event || r.name || '';
+                $('#category').value = r.category || 'Other';
+                $('#date').value = r.date || '';
+                $('#venue').value = r.venue || '';
+                $('#description').value = r.description || '';
+                idxEl.value = i;
+                formCard.style.display = 'block';
+                formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else if (a.dataset.action === 'delete') {
+                if (!confirm('Delete this record?')) return;
+                data.splice(i, 1);
+                save(data);
+                render();
+            }
+        });
+
+        
+        seedOrNormalize();
+        render();
+    </script>
+</body>
+</html>

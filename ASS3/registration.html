@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Zenathia.ai</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <h1 class="site-title">Zenathia.ai</h1>
+      <nav>
+        <a href="">Home</a>
+        <a href="">About</a>
+        <a href="">Events</a>
+        <a href="">Contact</a>
+        <a href="">Register</a>
+      </nav>
+    </header>
+  <main>
+    <div class="card">
+      <h1>User Registration</h1>
+      <form class="contact-form" method="POST" onsubmit="return validateForm(this)">
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Your name" required>
+        
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required>
+        
+        <label>Mobile</label>
+        <input type="text" name="mobile" placeholder="10-digit mobile number" required>
+        
+        <label>Choose Event</label>
+        <select name="event" required>
+          <option value="">Select an event</option>
+          <option value="AI">AI</option>
+          <option value="ML">ML</option>
+        </select>
+        
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter password" required>
+        
+        <label>Confirm Password</label>
+        <input type="password" name="confirmPassword" placeholder="Re-enter password" required>
+        
+        <button type="submit">Register Now</button>
+      </form>
+    </div>
+  </main>
+  <footer>© 2025 Simple Site</footer>
+
+  <script>
+   
+    function validateForm(form) {
+        
+        var name = form.name ? form.name.value : '';                          
+        var email = form.email ? form.email.value : '';                        
+        var mobile = form.mobile ? form.mobile.value : '';                     
+        var password = form.password ? form.password.value : '';               
+        var confirmPassword = form.confirmPassword ? form.confirmPassword.value : '';  
+
+        
+        if (name && name.length < 2) {                                         
+            alert('Name must be 2+ characters');                               
+            return false;                                                       
+        }
+
+        
+        if (email && !/\S+@\S+\.\S+/.test(email)) {                           
+            alert('Invalid email format');                                     
+            return false;                                                       
+        }
+
+        
+        if (mobile && !/^\d{10}$/.test(mobile)) {                             
+            alert('Mobile must be 10 digits');                                 
+            return false;                                                       
+        }
+
+        
+        if (password && password.length < 8) {                                 
+            alert('Password must be 8+ characters');                           
+            return false;                                                       
+        }
+
+        
+        if (password && confirmPassword && password !== confirmPassword) {     
+            alert('Password and Confirm Password must match');                 
+            return false;                                                       
+        }
+
+        return true;                                                            
+    }
+  </script>
+</body>
+</html>

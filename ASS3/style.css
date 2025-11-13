@@ -1,0 +1,209 @@
+
+body { 
+  font-family: Arial, sans-serif;  
+  margin: 0;                        
+  padding: 0;                       
+  background: #f9f9f9;              
+  color: #333;                      
+  min-height: 100vh;                
+  display: flex;                    
+  flex-direction: column;           
+}
+
+
+header { 
+  background: #84c0e6;          
+  color: #222;                      
+  padding: 15px;                    
+  display: flex;                    
+  align-items: center;              
+  justify-content: space-between;   
+  gap: 12px;                         
+}
+ 
+
+nav { 
+  margin: 0;                        
+}
+
+header h1 { 
+  margin: 0;                        
+  font-size: 1.25rem;               
+}
+
+
+nav a { 
+  margin: 0 8px;                    
+  color: #333;                      
+  text-decoration: none;            
+  font-weight: bold;                
+}
+
+
+nav a:hover { 
+  text-decoration: underline;       
+}
+
+
+main { 
+  flex: 1;                          
+  padding: 20px;                    
+  width: 100%;                      
+  box-sizing: border-box;           
+}
+
+
+h1 { 
+  margin-top: 0;                    
+}
+
+
+.card { 
+  background: #dbeeff;              
+  padding: 22px;                    
+  border-radius: 8px;               
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);  
+}
+
+
+.container { 
+  padding: 14px;                    
+  display: grid;                    
+  gap: 16px;                        
+  background: #f6fbff;              
+  border-radius: 8px;               
+  grid-template-columns: repeat(3, 1fr);  
+}
+
+
+footer { 
+  text-align: center;               
+  padding: 10px;                    
+  font-size: 0.9em;                 
+  color: #666;                      
+  margin-top: auto;                 
+}
+
+
+body.home main { 
+  display: block;
+  min-height: 0;
+}
+
+
+body.home .card { 
+  max-width: 700px;                 
+  text-align: center;               
+}
+
+
+.hero { 
+  background: #dbeeff; 
+  margin: 18px 24px;
+  border-radius: 12px;
+  padding: 46px 24px;
+  box-shadow: 0 8px 24px rgba(70,80,160,0.12);
+}
+.hero-inner { 
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
+.hero h1 { 
+  margin: 0 0 8px 0;
+  font-size: 2.25rem;
+  font-weight: 800;
+}
+
+
+.site-title {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  margin: 0;
+}
+.lead { 
+  margin: 0 0 18px 0;
+  opacity: 0.95;
+  font-size: 1.125rem;
+}
+.cta { 
+  display: inline-block;
+  background: #0f1230;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 6px 12px rgba(15,18,48,0.25);
+  margin-top: 6px;
+}
+.hero-sub { 
+  margin-top: 12px;
+  opacity: 0.95;
+}
+
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 0 20px 40px;
+}
+.feature-card {
+  background: white;
+  padding: 22px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(20,30,50,0.06);
+  text-align: center;
+}
+.feature-card h3 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 900px) {
+  .features { grid-template-columns: 1fr; }
+  .hero { padding: 36px 16px; margin: 12px; }
+  .hero h1 { font-size: 1.6rem; }
+}
+
+
+body.home .card h1 { 
+  font-size: 2rem;                  
+  font-weight: 700;                 
+}
+
+
+@media (max-width: 700px) { 
+  .container { 
+    grid-template-columns: 1fr;  
+  } 
+}
+
+
+.contact-form { 
+  display: flex;                    
+  flex-direction: column;           
+  gap: 8px;                         
+}
+
+
+.contact-form input, 
+.contact-form textarea { 
+  padding: 10px;                    
+  border: 1px solid #ddd;           
+  border-radius: 6px;               
+}
+
+
+.contact-form button { 
+  background: #4CAF50;              
+  color: white;                     
+  padding: 10px;                    
+  border: none;                     
+  border-radius: 6px;               
+  cursor: pointer;                  
+}

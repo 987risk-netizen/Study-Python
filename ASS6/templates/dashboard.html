@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zenathia.ai</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 class="site-title">ZENATHIA</h1>
+        <nav>
+            <a href="#" onclick="show()">Add</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="container">
+            {% for r in data %}
+            <div class="card">
+                <h1>{{ r.name }}</h1>
+                <p>{{ r.email }}</p>
+                <p>{{ r.mobile }}</p>
+                <p>{{ r.event }}</p>
+                <nav>
+                    <a href="?edit={{ r.id }}" onclick="show()">Edit</a>
+                    <a href="?del={{ r.id }}" onclick="return confirm('Delete?')">Delete</a>
+                </nav>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div id="f" class="card" {% if edit %}style="display:block"{% else %}style="display:none"{% endif %}>
+            <form action="/save" method="POST" class="contact-form">
+                <input type="hidden" name="id" value="{{ edit.id if edit }}">
+                <input type="text" name="name" placeholder="Name" value="{{ edit.name if edit }}" required>
+                <input type="email" name="email" placeholder="Email" value="{{ edit.email if edit }}" required>
+                <input type="text" name="mobile" placeholder="Mobile" value="{{ edit.mobile if edit }}" required>
+                <input type="text" name="event" placeholder="Event" value="{{ edit.event if edit }}" required>
+                <input type="password" name="password" placeholder="Password" value="{{ edit.password if edit }}" required>
+                <button type="submit">Save</button>
+                <button type="button" onclick="location='/dashboard'">Cancel</button>
+            </form>
+        </div>
+    </main>
+    <script>
+        function show() { document.getElementById('f').style.display='block'; }
+    </script>
+</body>
+</html>

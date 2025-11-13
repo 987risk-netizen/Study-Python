@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zenathia.ai</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 class="site-title">Zenathia.ai</h1>
+    
+    </header>
+    
+    <main>
+        <div class="card">
+             <select onchange="location='?event='+this.value" style="font-size: 18px; padding: 10px; width: 100%; max-width: 300px;">
+                <option value="ALL" {% if selected=='ALL' %}selected{% endif %}>ALL</option>
+                <option value="AI" {% if selected=='AI' %}selected{% endif %}>AI</option>
+                <option value="ML" {% if selected=='ML' %}selected{% endif %}>ML</option>
+                <option value="Tech Conference" {% if selected=='Tech Conference' %}selected{% endif %}>Tech Conference</option>
+                <option value="Workshop" {% if selected=='Workshop' %}selected{% endif %}>Workshop</option>
+            </select>
+            <h3>Showing: {{ selected }}</h3>
+        </div>
+        
+        <div id="dynamicEvents" class="container">
+            {% for p in data %}
+            <div class="card">
+                <h1>{{ p.name }}</h1>
+                <p><strong>Email:</strong> {{ p.email }}</p>
+                <p><strong>Mobile:</strong> {{ p.mobile }}</p>
+                <p><strong>Event:</strong> {{ p.event }}</p>
+                <p><strong>Date:</strong> {{ p.created_at }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

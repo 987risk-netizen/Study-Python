@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Zenathia.ai</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		:root{ --brand:#0d6efd; --muted:#6c757d; --bg:#f7fbfc }
+			html,body{height:100%;}
+			body.home{background:var(--bg); margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
+
+			
+			.hero-wrap{min-height:60vh; display:flex; align-items:center; justify-content:center}
+			.hero-card{max-width:760px; width:100%;}
+			.hero-title{font-weight:800; letter-spacing:-0.5px}
+			.hero-lead{color:var(--muted)}
+
+			
+			.tools-section .card{transition:transform .15s ease, box-shadow .15s ease}
+			.tools-section .card:hover{transform:translateY(-6px); box-shadow:0 10px 30px rgba(13,110,253,.08)}
+
+			
+			.cta-lg{padding:.9rem 1.6rem; font-size:1.05rem; border-radius:.6rem}
+
+			
+			@media (max-width:767.98px){
+				.hero-wrap{min-height:40vh; padding:2rem 0}
+				.hero-title{font-size:1.6rem}
+			}
+		</style>
+</head>
+<body class="home">
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+		<div class="container">
+			<a class="navbar-brand fw-bold" href="#">Zenathia.ai</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="mainNav">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="#ai-tools">AI Tools</a></li>
+					<li class="nav-item"><a class="nav-link" href="#get-started">Start</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<main>
+		<div class="container">
+			<div class="hero-wrap py-5" id="home">
+				<div class="hero-card card shadow-sm">
+					<div class="card-body p-4 text-center">
+						<h1 class="hero-title mb-2">Welcome</h1>
+						<p class="hero-lead mb-3">Simple · Elegant · Minimal</p>
+						<p class="mb-3">This tiny site shows a clean, minimal layout with an events page that lists activities as cards. Resize the window to see the events layout adapt there. The home page stays focused and centered so visitors get a clear, bold first impression.</p>
+						<p class="mb-3">Features: readable typography, soft card styling, and a responsive grid for event cards on the Events page.</p>
+
+						<div class="d-flex justify-content-center gap-2">
+							<a href="#ai-tools" class="btn btn-primary btn-lg">View Events</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<section class="tools-section py-5" id="ai-tools">
+				<div class="container">
+					<h3 class="text-center mb-4">AI Tools</h3>
+
+					<div class="row g-4 justify-content-center">
+						<div class="col-12 col-md-4">
+							<div class="card h-100 text-center p-3">
+								<div class="card-body d-flex flex-column">
+									<h5 class="mb-2">ChatGPT</h5>
+									<p class="text-muted mb-3">A conversational assistant for coding help, explanations, and creative writing.</p>
+									<a class="btn btn-primary mt-auto" href="#">Open Chat</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-md-4">
+							<div class="card h-100 text-center p-3">
+								<div class="card-body d-flex flex-column">
+									<h5 class="mb-2">DALL·E</h5>
+									<p class="text-muted mb-3">Generate images from text prompts — quick mockups, illustrations, and visuals.</p>
+									<a class="btn btn-secondary mt-auto" href="#">Open Image Lab</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-md-4">
+							<div class="card h-100 text-center p-3">
+								<div class="card-body d-flex flex-column">
+									<h5 class="mb-2">Gemini</h5>
+									<p class="text-muted mb-3">Large multimodal model for research, planning, and advanced queries.</p>
+									<a class="btn btn-info text-white mt-auto" href="#">Open Gemini</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row mt-4" id="get-started">
+						<div class="col-12 text-center">
+							<blockquote class="blockquote fs-5 text-muted">"Make something people love — one small step at a time."</blockquote>
+							<a class="btn btn-success btn-lg mt-3" href="#get-started">Get Started</a>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</main>
+
+	<footer class="py-3 bg-white border-top">
+		<div class="container text-center small text-muted">© 2025 Simple Site</div>
+	</footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
