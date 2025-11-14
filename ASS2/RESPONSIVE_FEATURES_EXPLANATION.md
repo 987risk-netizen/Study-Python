@@ -1,8 +1,12 @@
 # Responsive Features in home_2nd.html
 
-## Overview
-This document explains how `home_2nd.html` achieves responsiveness using a combination of **Bootstrap** and **Media Queries**.
+✔ Bootstrap (One Line)
 
+Bootstrap is a ready-made CSS framework used to quickly design responsive, mobile-first websites using prebuilt classes.
+
+✔ Media Query (One Line)
+
+A media query is a CSS rule that applies styles based on screen size or device type to make a website responsive.
 ---
 
 ## 1. Bootstrap Usage (Minimal)
@@ -611,3 +615,4 @@ The page uses a **hybrid approach**:
 - **Custom CSS** (style.css) for overall design and structure
 
 This keeps the code simple while maintaining good responsiveness across devices.
+
